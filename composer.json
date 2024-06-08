@@ -9,6 +9,7 @@
         "jantinnerezo/livewire-alert": "^3.0",
         "laravel/framework": "^11.9",
         "laravel/jetstream": "^5.1",
+        "laravel/reverb": "@beta",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.0"

@@ -1,4 +1,4 @@
-<div>
+<div class="min-h-screen">
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Chat') }}
@@ -9,19 +9,21 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-4">
 
-                @foreach ($conversation as $item)
-                    <div class="bg-indigo-300 p-4 mb-5">
-                        <p class="font-bold">
-                            {{ $item->user->name }}
-                        </p>
-                        <p class="text-black/80">
-                            {{ $item->message }}
-                        </p>
-                        <p class="text-black/50">
-                            {{ $item->created_at }}
-                        </p>
-                    </div>
-                @endforeach
+                <div class="overflow-y-scroll">
+                    @foreach ($conversation as $item)
+                        <div class="bg-indigo-300 p-4 mb-5">
+                            <p class="font-bold">
+                                {{ $item['user']['name'] ?? '' }}
+                            </p>
+                            <p class="text-black/80">
+                                {{ $item['message'] ?? '' }}
+                            </p>
+                            <p class="text-black/50">
+                                {{ $item['created_at'] ?? '' }}
+                            </p>
+                        </div>
+                    @endforeach
+                </div>
 
                 <form wire:submit="save">
                     <input type="text" wire:model="message">
