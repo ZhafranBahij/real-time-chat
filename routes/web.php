@@ -1,5 +1,7 @@
 <?php
 
+use App\Livewire\Chat;
+use App\Livewire\Chat\ChatIndex;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -14,4 +16,7 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+
+    Route::get('/chat', ChatIndex::class)->name('chat');
+
 });
