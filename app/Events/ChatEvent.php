@@ -30,9 +30,7 @@ class ChatEvent implements ShouldBroadcastNow
         ]);
 
         $this->chat = $chat->toArray();
-
-        // $this->message = $chat->message;
-        // $this->user_id = $chat->user_id;
+        $this->chat['username'] = auth()->user()->name;
     }
 
     /**

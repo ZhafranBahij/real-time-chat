@@ -4,6 +4,7 @@ namespace App\Livewire\Chat;
 
 use App\Events\ChatEvent;
 use App\Models\Chat;
+use App\Models\User;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -23,8 +24,6 @@ class ChatIndex extends Component
     public function mount()
     {
         $this->conversation = Chat::with('user')
-        // ->limit(2)
-                                // ->latest()
                                 ->get()
                                 ->toArray();
         // dd($this->conversation);
@@ -42,6 +41,8 @@ class ChatIndex extends Component
         $validated = $this->validate();
         $validated['user_id'] = auth()->user()->id;
 
+        // sleep(5);
+
         ChatEvent::dispatch($validated);
 
         $this->alert('success', 'Message has been sended');
@@ -52,7 +53,15 @@ class ChatIndex extends Component
     #[On('echo:chat,ChatEvent')]
     public function saveMessage($chat)
     {
-        $this->conversation[] = $chat;
+        // dd($chat);
+        $this->conversation[] = [
+            'message' => $chat['chat']['message'],
+            'user' => [
+                'name' => $chat['chat']['username'],
+            ],
+            'created_at' => $chat['chat']['created_at'],
+        ];
+        // dd($this->conversation);
     }
 
     #[Layout('layouts.app')]
